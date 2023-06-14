@@ -11,10 +11,10 @@ SAMPLING_RATE=16000
 
 ############################ Stages: you can manually control any of the preprocessing stages
 ### preprocessing stages
-DATA_CURATION=false
-FORMAT_CORRECTION=false
-DATA_SPLITTING=false
-KALDI_FILES_PREPARATION=false
+DATA_CURATION=true
+FORMAT_CORRECTION=true
+DATA_SPLITTING=true
+KALDI_FILES_PREPARATION=true
 
 
 ### Training stages
@@ -47,7 +47,7 @@ then
     mkdir $RESAMPLED_AUDIO_PATH
     for i in `ls $AUDIO_PATH`;
         do 
-        sox $AUDIO_PATH/$i -r $SAMPLING_RATE -b $BITRATE -c 1 $RESAMPLED_AUDIO_PATH/$i
+        sox $AUDIO_PATH/$i -r $SAMPLING_RATE -b $BITRATE -c 1 $RESAMPLED_AUDIO_PATH/${i//flac/wav}
     done
     mv $AUDIO_PATH/* ./temp
     mv $RESAMPLED_AUDIO_PATH/* $AUDIO_PATH
