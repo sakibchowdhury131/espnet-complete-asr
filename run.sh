@@ -9,7 +9,7 @@ BITRATE=16
 SAMPLING_RATE=16000
 
 
-############################ Stages: you can manually control any of the preprocessing stages
+############################ Manual Control over each operational stage
 ### preprocessing stages
 DATA_CURATION=true
 FORMAT_CORRECTION=true
@@ -118,7 +118,7 @@ fi
 ### training stage 3
 if `$STAGE3 -eq true`
 then
-    ./run.sh  --ngpu 1 --stage 3 --stop-stage 3
+    ./run.sh  --ngpu 1 --stage 3 --stop-stage 3 --train-config ./conf/tuning/train_pytorch_transformer.yaml
 fi
 
 
