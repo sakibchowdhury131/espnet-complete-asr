@@ -5,6 +5,7 @@ RESAMPLED_AUDIO_PATH='./temp/resampled_audios'
 METADATA_PATH='./dataset.metadata.tsv'
 KALDI_DIRECTORY='./dataset/KALDI_FILES'
 ESPNET_RECIPEE_PATH='../espnet/egs/librispeech/asr1'
+ESPNET_TRAIN_CONFIG_FILE='train_pytorch_transformer_lr5.0_ag8.v2.yaml'
 BITRATE=16
 SAMPLING_RATE=16000
 
@@ -118,14 +119,14 @@ fi
 ### training stage 3
 if `$STAGE3 -eq true`
 then
-    ./run.sh  --ngpu 1 --stage 3 --stop-stage 3 --train-config ./conf/tuning/train_pytorch_transformer.yaml
+    ./run.sh  --ngpu 1 --stage 3 --stop-stage 3 --train-config ./conf/tuning/$ESPNET_TRAIN_CONFIG_FILE
 fi
 
 
 ### training stage 4
 if `$STAGE4 -eq true`
 then
-    ./run.sh  --ngpu 1 --stage 4 --stop-stage 4
+    ./run.sh  --ngpu 1 --stage 4 --stop-stage 4 --train-config ./conf/tuning/$ESPNET_TRAIN_CONFIG_FILE
 fi
 
 

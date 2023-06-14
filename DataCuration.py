@@ -12,6 +12,7 @@ def main():
         return
     
 
+
     ### rename the files in spk_id-utt_id.wav in this format
     rename(AUDIO_SOURCE = './dataset/audio_files',  
            METADATA = './dataset/metadata.tsv')
