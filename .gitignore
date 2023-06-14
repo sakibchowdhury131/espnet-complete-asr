@@ -1,0 +1,9 @@
+## ignore all compressed files
+*.zip
+*.tar.gz
+*tar
+
+## ignore all audio files
+*.flac
+*.wav
+*.mp3
