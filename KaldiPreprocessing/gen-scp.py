@@ -20,7 +20,7 @@ if not os.path.exists(destination_dir):
 f= open(destination_dir + "/wav.scp","w")
 
 for i in range (len(df)):
-    f.write(df['file_name'][i]+' '+audio_dir + '/'+df['file_name'][i].replace('-','').replace(df['spk_id'][i], '') +'.'+file_extension +'\n')
+    f.write(df['file_name'][i]+' '+audio_dir + '/'+df['file_name'][i]+'.'+file_extension +'\n')
 f.close()
 
 
@@ -41,7 +41,7 @@ if not os.path.exists(destination_dir):
 f= open(destination_dir + "/wav.scp","w")
 
 for i in range (len(df)):
-    f.write(df['file_name'][i]+' '+audio_dir + '/'+df['file_name'][i].replace('-','').replace(df['spk_id'][i], '') +'.'+file_extension +'\n')
+    f.write(df['file_name'][i]+' '+audio_dir + '/'+df['file_name'][i]+'.'+file_extension +'\n')
 f.close()
 
 
@@ -61,5 +61,5 @@ if not os.path.exists(destination_dir):
 f= open(destination_dir + "/wav.scp","w")
 
 for i in range (len(df)):
-    f.write(df['file_name'][i]+' '+audio_dir + '/'+df['file_name'][i].replace('-','').replace(df['spk_id'][i], '') +'.'+file_extension +'\n')
+    f.write(df['file_name'][i]+' '+audio_dir + '/'+df['file_name'][i]+'.'+file_extension +'\n')
 f.close()
