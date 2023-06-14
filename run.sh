@@ -4,7 +4,7 @@ AUDIO_PATH='./dataset/audio_files'
 RESAMPLED_AUDIO_PATH='./temp/resampled_audios'
 METADATA_PATH='./dataset.metadata.tsv'
 KALDI_DIRECTORY='./dataset/KALDI_FILES'
-ESPNET_RECIPEE_PATH='./espnet/egs/librispeech/asr1/'
+ESPNET_RECIPEE_PATH='../espnet/egs/librispeech/asr1/'
 BITRATE=16
 SAMPLING_RATE=16000
 
@@ -18,11 +18,11 @@ KALDI_FILES_PREPARATION=true
 
 
 ### Training stages
-STAGE1=true
-STAGE2=true
-STAGE3=true
-STAGE4=true
-STAGE5=true
+STAGE1=false
+STAGE2=false
+STAGE3=false
+STAGE4=false
+STAGE5=false
 
 
 
@@ -92,6 +92,7 @@ mv ./dataset $ESPNET_RECIPEE_PATH
 mkdir $ESPNET_RECIPEE_PATH/data
 cd $ESPNET_RECIPEE_PATH
 cp -r $KALDI_DIRECTORY/* ./data
+mv ./data/val ./data/dev
 
 
 
