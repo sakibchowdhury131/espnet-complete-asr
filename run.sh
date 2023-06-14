@@ -4,20 +4,21 @@ AUDIO_PATH='./dataset/audio_files'
 RESAMPLED_AUDIO_PATH='./temp/resampled_audios'
 METADATA_PATH='./dataset.metadata.tsv'
 KALDI_DIRECTORY='./dataset/KALDI_FILES'
-ESPNET_RECIPEE_PATH='../espnet/egs/librispeech/asr1/'
+ESPNET_RECIPEE_PATH='../espnet/egs/librispeech/asr1'
 BITRATE=16
 SAMPLING_RATE=16000
 
 
 ############################ Stages: you can manually control any of the preprocessing stages
 ### preprocessing stages
-DATA_CURATION=true
-FORMAT_CORRECTION=true
-DATA_SPLITTING=true
-KALDI_FILES_PREPARATION=true
+DATA_CURATION=false
+FORMAT_CORRECTION=false
+DATA_SPLITTING=false
+KALDI_FILES_PREPARATION=false
 
 
 ### Training stages
+TRAINING_START=true
 STAGE1=false
 STAGE2=false
 STAGE3=false
@@ -87,12 +88,14 @@ fi
 ############################ Training Stages
 
 ### move the files to appropriate directory 
-echo preparing recipe
-mv ./dataset $ESPNET_RECIPEE_PATH
-mkdir $ESPNET_RECIPEE_PATH/data
-cd $ESPNET_RECIPEE_PATH
-cp -r $KALDI_DIRECTORY/* ./data
-mv ./data/val ./data/dev
+if `$TRAINING_START -eq true`
+then
+    echo preparing recipe
+    mv ./dataset $ESPNET_RECIPEE_PATH
+    mkdir $ESPNET_RECIPEE_PATH/data
+    cd $ESPNET_RECIPEE_PATH
+    cp -r $KALDI_DIRECTORY/* ./data
+fi
 
 
 
