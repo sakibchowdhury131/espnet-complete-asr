@@ -2,7 +2,7 @@
 
 AUDIO_PATH='./dataset/audio_files'
 RESAMPLED_AUDIO_PATH='./temp/resampled_audios'
-METADATA_PATH='./dataset.metadata.tsv'
+METADATA_PATH='./dataset/metadata.tsv'
 KALDI_DIRECTORY='./dataset/KALDI_FILES'
 ESPNET_RECIPEE_PATH='../espnet/egs/librispeech/asr1'
 ESPNET_TRAIN_CONFIG_FILE='train_pytorch_transformer_lr5.0_ag8.v2.yaml'
