@@ -95,6 +95,7 @@ then
     mkdir $ESPNET_RECIPEE_PATH/data
     cd $ESPNET_RECIPEE_PATH
     cp -r $KALDI_DIRECTORY/* ./data
+    mv ./data/val ./data/dev
 fi
 
 
