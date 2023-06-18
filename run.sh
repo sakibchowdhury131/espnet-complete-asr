@@ -29,6 +29,9 @@ STAGE5=false
 
 
 
+
+set -e ## exit when error occurs
+
 ############################ Preprocessing Stages
 ### curate the dataset
 if `$DATA_CURATION -eq true`
@@ -54,8 +57,6 @@ then
         python3 utils/m4atowav.py --audio_source $AUDIO_PATH
         mv $AUDIO_PATH/* ./temp
         mv ./temp/wavs_out/* $AUDIO_PATH
-    else
-        echo "Strings are not equal."
     fi
     for i in `ls $AUDIO_PATH`;
         do 
