@@ -1,11 +1,12 @@
 ### paths and params
-DATASET_PATH='./dataset/'
-AUDIO_PATH=$DATASET_PATH/audio_files
+DATASET_PATH='./banking-domain-dataset'
+AUDIO_PATH=$DATASET_PATH'/audio_files'
 RESAMPLED_AUDIO_PATH='./temp/resampled_audios'
-METADATA_PATH=$DATASET_PATH/metadata.tsv
-KALDI_DIRECTORY=$DATASET_PATH/KALDI_FILES
+METADATA_PATH=$DATASET_PATH'/metadata.tsv'
+KALDI_DIRECTORY=$DATASET_PATH'/KALDI_FILES'
 ESPNET_RECIPEE_PATH='../espnet/egs/librispeech/asr1'
 ESPNET_TRAIN_CONFIG_FILE='train_pytorch_transformer_lr5.0_ag8.v2.yaml'
+AUDIO_FORMAT='m4a' #audio format of the collected dataset
 BITRATE=16
 SAMPLING_RATE=16000
 
@@ -13,16 +14,16 @@ SAMPLING_RATE=16000
 ############################ Manual Control over each operational stage
 ### preprocessing stages
 DATA_CURATION=true
-FORMAT_CORRECTION=false
-DATA_SPLITTING=false
-KALDI_FILES_PREPARATION=false
+FORMAT_CORRECTION=true
+DATA_SPLITTING=true
+KALDI_FILES_PREPARATION=true
 
 
 ### Training stages
-TRAINING_START=false
-STAGE1=false
-STAGE2=false
-STAGE3=false
+TRAINING_START=true
+STAGE1=true
+STAGE2=true
+STAGE3=true
 STAGE4=false
 STAGE5=false
 
@@ -32,7 +33,7 @@ STAGE5=false
 ### curate the dataset
 if `$DATA_CURATION -eq true`
 then
-    python3 DataCuration.py --audio_source $AUDIO_PATH --metadata $METADATA_PATH
+    python3 DataCuration.py --audio_source $AUDIO_PATH --metadata $METADATA_PATH --audio_format $AUDIO_FORMAT
 fi
 
 
@@ -48,7 +49,7 @@ then
     mkdir $RESAMPLED_AUDIO_PATH
     for i in `ls $AUDIO_PATH`;
         do 
-        sox $AUDIO_PATH/$i -r $SAMPLING_RATE -b $BITRATE -c 1 $RESAMPLED_AUDIO_PATH/${i//flac/wav}
+        sox $AUDIO_PATH/$i -r $SAMPLING_RATE -b $BITRATE -c 1 $RESAMPLED_AUDIO_PATH/${i//$AUDIO_FORMAT/wav}
     done
     mv $AUDIO_PATH/* ./temp
     mv $RESAMPLED_AUDIO_PATH/* $AUDIO_PATH

@@ -4,11 +4,11 @@ from CheckingProtocols.Rename import rename
 
 
 
-def main(AUDIO_SOURCE, METADATA):
+def main(AUDIO_SOURCE, METADATA, audio_format):
     
     ### data integrity checking 
     OK = True
-    dataset_state = dataIntegrityChecker(AUDIO_SOURCE = AUDIO_SOURCE,  METADATA = METADATA)
+    dataset_state = dataIntegrityChecker(AUDIO_SOURCE = AUDIO_SOURCE,  METADATA = METADATA, audio_format=audio_format)
     if dataset_state == OK:
         print('Dataset ----> OK')
     else:
@@ -30,5 +30,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Curate Dataset')
     parser.add_argument('--audio_source', type=str, required=True)
     parser.add_argument('--metadata', type=str, required=True)
+    parser.add_argument('--audio_format', type=str, required=True)
     args = parser.parse_args()
-    main(args.audio_source, args.metadata)
+    main(args.audio_source, args.metadata, args.audio_format)

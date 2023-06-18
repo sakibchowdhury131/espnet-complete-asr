@@ -4,9 +4,8 @@ This file checks if all the audios mentioned in the METADATA are present in the 
 
 import os
 from tqdm import tqdm
-import argparse
 
-def dataIntegrityChecker(AUDIO_SOURCE = './dataset/audio_files',  METADATA = './dataset/metadata.tsv'):
+def dataIntegrityChecker(AUDIO_SOURCE = './dataset/audio_files',  METADATA = './dataset/metadata.tsv', audio_format = 'flac'):
     OK = True
     dataset_integrity = OK
 
@@ -19,7 +18,7 @@ def dataIntegrityChecker(AUDIO_SOURCE = './dataset/audio_files',  METADATA = './
         spk_id = line.split('\t')[1]
         utt = line.split('\t')[2]
 
-        if not filename+'.flac' in files:
+        if not filename+'.'+audio_format in files:
             print(f'Filename: {filename} || Speaker ID: {spk_id} || Utterance: {utt} ---> audio file missing')
             dataset_integrity = not OK
     
