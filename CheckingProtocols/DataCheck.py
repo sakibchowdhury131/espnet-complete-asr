@@ -4,7 +4,7 @@ This file checks if all the audios mentioned in the METADATA are present in the 
 
 import os
 from tqdm import tqdm
-
+import argparse
 
 def dataIntegrityChecker(AUDIO_SOURCE = './dataset/audio_files',  METADATA = './dataset/metadata.tsv'):
     OK = True

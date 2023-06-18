@@ -1,9 +1,15 @@
 import pandas as pd
 import os
 import csv
+import argparse
+
+
+parser = argparse.ArgumentParser(description='Generate Text')
+parser.add_argument('--kaldi_destination', type=str, default='./dataset/KALDI_FILES')
+args = parser.parse_args()
 
 source = './temp/train.txt'
-destination_dir = './dataset/KALDI_FILES/train'
+destination_dir = os.path.join(args.kaldi_destination, 'train')
 
 df = pd.read_csv(source, delimiter='\t', header=None, quoting=csv.QUOTE_NONE)
 df.columns = ['file_name', 'spk_id', 'transcription']
@@ -21,7 +27,7 @@ f.close()
 
 
 source = './temp/val.txt'
-destination_dir = './dataset/KALDI_FILES/val'
+destination_dir = os.path.join(args.kaldi_destination, 'val')
 
 df = pd.read_csv(source, delimiter='\t', header=None, quoting=csv.QUOTE_NONE)
 df.columns = ['file_name', 'spk_id', 'transcription']
@@ -38,7 +44,7 @@ f.close()
 
 
 source = './temp/test.txt'
-destination_dir = './dataset/KALDI_FILES/test'
+destination_dir = os.path.join(args.kaldi_destination, 'test')
 
 df = pd.read_csv(source, delimiter='\t', header=None, quoting=csv.QUOTE_NONE)
 df.columns = ['file_name', 'spk_id', 'transcription']

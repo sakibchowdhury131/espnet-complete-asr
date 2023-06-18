@@ -1,9 +1,9 @@
 ### paths and params
-
-AUDIO_PATH='./dataset/audio_files'
+DATASET_PATH='./dataset/'
+AUDIO_PATH=$DATASET_PATH/audio_files
 RESAMPLED_AUDIO_PATH='./temp/resampled_audios'
-METADATA_PATH='./dataset/metadata.tsv'
-KALDI_DIRECTORY='./dataset/KALDI_FILES'
+METADATA_PATH=$DATASET_PATH/metadata.tsv
+KALDI_DIRECTORY=$DATASET_PATH/KALDI_FILES
 ESPNET_RECIPEE_PATH='../espnet/egs/librispeech/asr1'
 ESPNET_TRAIN_CONFIG_FILE='train_pytorch_transformer_lr5.0_ag8.v2.yaml'
 BITRATE=16
@@ -13,13 +13,13 @@ SAMPLING_RATE=16000
 ############################ Manual Control over each operational stage
 ### preprocessing stages
 DATA_CURATION=true
-FORMAT_CORRECTION=true
-DATA_SPLITTING=true
-KALDI_FILES_PREPARATION=true
+FORMAT_CORRECTION=false
+DATA_SPLITTING=false
+KALDI_FILES_PREPARATION=false
 
 
 ### Training stages
-TRAINING_START=true
+TRAINING_START=false
 STAGE1=false
 STAGE2=false
 STAGE3=false
@@ -32,7 +32,7 @@ STAGE5=false
 ### curate the dataset
 if `$DATA_CURATION -eq true`
 then
-    python3 DataCuration.py
+    python3 DataCuration.py --audio_source $AUDIO_PATH --metadata $METADATA_PATH
 fi
 
 
@@ -59,7 +59,7 @@ fi
 if `$DATA_SPLITTING -eq true`
 then 
     echo data splitting ---- 
-    python3 ./misc/train_test_dev_split.py
+    python3 ./misc/train_test_dev_split.py --metadata $METADATA_PATH --train_split 0.9
     echo completed
 fi
 
@@ -68,19 +68,19 @@ fi
 if `$KALDI_FILES_PREPARATION -eq true`
 then
     mkdir $KALDI_DIRECTORY
-    echo generating utt2spk files
-    python3 ./KaldiPreprocessing/generate_utt2spk.py
+    echo generating utt2spk files 
+    python3 ./KaldiPreprocessing/generate_utt2spk.py --kaldi_destination $KALDI_DIRECTORY
 
     echo generating spk2utt files
-    perl ./KaldiPreprocessing/utt2spk_to_spk2utt.pl ./dataset/KALDI_FILES/train/utt2spk > ./dataset/KALDI_FILES/train/spk2utt
-    perl ./KaldiPreprocessing/utt2spk_to_spk2utt.pl ./dataset/KALDI_FILES/val/utt2spk > ./dataset/KALDI_FILES/val/spk2utt
-    perl ./KaldiPreprocessing/utt2spk_to_spk2utt.pl ./dataset/KALDI_FILES/test/utt2spk > ./dataset/KALDI_FILES/test/spk2utt
+    perl ./KaldiPreprocessing/utt2spk_to_spk2utt.pl $KALDI_DIRECTORY/train/utt2spk > $KALDI_DIRECTORY/train/spk2utt
+    perl ./KaldiPreprocessing/utt2spk_to_spk2utt.pl $KALDI_DIRECTORY/val/utt2spk > $KALDI_DIRECTORY/val/spk2utt
+    perl ./KaldiPreprocessing/utt2spk_to_spk2utt.pl $KALDI_DIRECTORY/test/utt2spk > $KALDI_DIRECTORY/test/spk2utt
 
     echo generating text files
-    python3 ./KaldiPreprocessing/gen-text.py
+    python3 ./KaldiPreprocessing/gen-text.py --kaldi_destination $KALDI_DIRECTORY
     
     echo generating scp files
-    python3 ./KaldiPreprocessing/gen-scp.py
+    python3 ./KaldiPreprocessing/gen-scp.py --kaldi_destination $KALDI_DIRECTORY --audio_source $AUDIO_PATH
 fi
 
 
@@ -92,7 +92,7 @@ fi
 if `$TRAINING_START -eq true`
 then
     echo preparing recipe
-    mv ./dataset $ESPNET_RECIPEE_PATH
+    mv $DATASET_PATH $ESPNET_RECIPEE_PATH
     mkdir $ESPNET_RECIPEE_PATH/data
     cd $ESPNET_RECIPEE_PATH
     cp -r $KALDI_DIRECTORY/* ./data
