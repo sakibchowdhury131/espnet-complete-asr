@@ -47,6 +47,16 @@ then
     echo BITRATE: PCM$BITRATE
     echo SAMPLING_RATE: $SAMPLING_RATE
     mkdir $RESAMPLED_AUDIO_PATH
+    m4a="m4a"
+
+    if [ "$AUDIO_FORMAT" = "$m4a" ]; then
+        echo "m4a format detected. Convertion needed. Converting..."
+        python3 utils/m4atowav.py --audio_source $AUDIO_PATH
+        mv $AUDIO_PATH/* ./temp
+        mv ./temp/wavs_out/* $AUDIO_PATH
+    else
+        echo "Strings are not equal."
+    fi
     for i in `ls $AUDIO_PATH`;
         do 
         sox $AUDIO_PATH/$i -r $SAMPLING_RATE -b $BITRATE -c 1 $RESAMPLED_AUDIO_PATH/${i//$AUDIO_FORMAT/wav}
