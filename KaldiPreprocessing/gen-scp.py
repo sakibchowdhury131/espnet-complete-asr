@@ -18,7 +18,6 @@ file_extension = random.choice(os.listdir(audio_dir)).split('.')[-1]
 
 df = pd.read_csv(source, delimiter='\t', header=None, quoting=csv.QUOTE_NONE)
 df.columns = ['file_name', 'spk_id', 'transcription']
-
 df.sort_values(['file_name', 'spk_id'], axis=0, ascending=[True, True], inplace=True, ignore_index=True, na_position='first')
 
 
@@ -41,8 +40,6 @@ df = pd.read_csv(source, delimiter='\t', header=None, quoting=csv.QUOTE_NONE)
 df.columns = ['file_name', 'spk_id', 'transcription']
 
 df.sort_values(['file_name', 'spk_id'], axis=0, ascending=[True, True], inplace=True, ignore_index=True, na_position='first')
-
-
 if not os.path.exists(destination_dir):
     os.makedirs(destination_dir)
 f= open(destination_dir + "/wav.scp","w")
