@@ -19,7 +19,7 @@ def main(AUDIO_SOURCE, METADATA, audio_format):
 
     ### rename the files in spk_id-utt_id.wav in this format
     rename(AUDIO_SOURCE = AUDIO_SOURCE,  
-           METADATA = AUDIO_SOURCE)
+           METADATA = METADATA)
     
 
     ### Fix audio format issues 
@@ -32,4 +32,4 @@ if __name__ == '__main__':
     parser.add_argument('--metadata', type=str, required=True)
     parser.add_argument('--audio_format', type=str, required=True)
     args = parser.parse_args()
-    main(args.audio_source, args.metadata, args.audio_format)
+    main(AUDIO_SOURCE = args.audio_source, METADATA = args.metadata, audio_format = args.audio_format)
