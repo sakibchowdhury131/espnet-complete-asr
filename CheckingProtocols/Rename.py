@@ -9,6 +9,8 @@ def rename(AUDIO_SOURCE = './dataset/audio_files',
     TEMP_DIR = './temp'
     print(f'Renaming files in ----> {AUDIO_SOURCE}')
     fileExtension = random.choice(os.listdir(AUDIO_SOURCE)).split('.')[-1]
+    print(fileExtension)
+    print(METADATA)
     with open(METADATA, 'r') as f:
         print('I am reading metadata')
         lines = f.readlines()
