@@ -13,7 +13,7 @@ SAMPLING_RATE=16000
 
 ############################ Manual Control over each operational stage
 ### preprocessing stages
-DATA_CURATION=true
+DATA_CURATION=false
 FORMAT_CORRECTION=true
 DATA_SPLITTING=true
 KALDI_FILES_PREPARATION=true
@@ -49,7 +49,7 @@ then
     echo Configuration is: -------------
     echo BITRATE: PCM$BITRATE
     echo SAMPLING_RATE: $SAMPLING_RATE
-    mkdir $RESAMPLED_AUDIO_PATH
+    mkdir -p $RESAMPLED_AUDIO_PATH
     m4a="m4a"
 
     if [ "$AUDIO_FORMAT" = "$m4a" ]; then
