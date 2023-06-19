@@ -34,6 +34,7 @@ set -e ## exit when error occurs
 
 ############################ Preprocessing Stages
 ### curate the dataset
+rm -rf ./temp/*
 if `$DATA_CURATION -eq true`
 then
     python3 DataCuration.py --audio_source $AUDIO_PATH --metadata $METADATA_PATH --audio_format $AUDIO_FORMAT
