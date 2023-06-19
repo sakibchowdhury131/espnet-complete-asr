@@ -119,6 +119,8 @@ fi
 ### training stage 1
 if `$STAGE1 -eq true`
 then
+    echo current directory: 
+    pwd
     ./run.sh  --ngpu 1 --stage 1 --stop-stage 1
 fi
 
@@ -126,6 +128,8 @@ fi
 ### training stage 2
 if `$STAGE2 -eq true`
 then
+    echo current directory: 
+    pwd
     ./run.sh  --ngpu 1 --stage 2 --stop-stage 2
 fi
 
@@ -133,6 +137,8 @@ fi
 ### training stage 3
 if `$STAGE3 -eq true`
 then
+    echo current directory: 
+    pwd
     ./run.sh  --ngpu 1 --stage 3 --stop-stage 3 --train-config ./conf/tuning/$ESPNET_TRAIN_CONFIG_FILE
 fi
 
@@ -140,6 +146,8 @@ fi
 ### training stage 4
 if `$STAGE4 -eq true`
 then
+    echo current directory: 
+    pwd
     ./run.sh  --ngpu 1 --stage 4 --stop-stage 4 --train-config ./conf/tuning/$ESPNET_TRAIN_CONFIG_FILE
 fi
 
@@ -147,5 +155,7 @@ fi
 ### training stage 5
 if `$STAGE5 -eq true`
 then
+    echo current directory: 
+    pwd
     ./run.sh  --ngpu 1 --stage 5 --stop-stage 5
 fi
