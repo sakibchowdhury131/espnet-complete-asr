@@ -10,7 +10,6 @@ def rename(AUDIO_SOURCE = './dataset/audio_files',
     print(f'Renaming files in ----> {AUDIO_SOURCE}')
     fileExtension = random.choice(os.listdir(AUDIO_SOURCE)).split('.')[-1]
     with open(METADATA, 'r') as f:
-        print('I am reading metadata')
         lines = f.readlines()
 
     if not os.path.exists(TEMP_DIR):
