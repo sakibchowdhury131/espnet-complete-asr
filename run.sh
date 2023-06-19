@@ -35,6 +35,7 @@ set -e ## exit when error occurs
 ############################ Preprocessing Stages
 ### curate the dataset
 rm -rf ./temp/*
+rm -rf $ESPNET_RECIPEE_PATH/banking-domain-dataset/ $ESPNET_RECIPEE_PATH/data $ESPNET_RECIPEE_PATH/dump $ESPNET_RECIPEE_PATH/fbank 
 if `$DATA_CURATION -eq true`
 then
     python3 DataCuration.py --audio_source $AUDIO_PATH --metadata $METADATA_PATH --audio_format $AUDIO_FORMAT
