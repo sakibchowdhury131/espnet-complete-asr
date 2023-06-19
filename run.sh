@@ -61,7 +61,7 @@ then
     fi
     for i in `ls $AUDIO_PATH`;
         do 
-        sox $AUDIO_PATH/$i -r $SAMPLING_RATE -b $BITRATE -c 1 $RESAMPLED_AUDIO_PATH/${i//$AUDIO_FORMAT/wav}
+        sox $AUDIO_PATH/$i -r $SAMPLING_RATE -b $BITRATE -c 1 -G $RESAMPLED_AUDIO_PATH/${i//$AUDIO_FORMAT/wav}
     done
     mv $AUDIO_PATH/* ./temp
     mv $RESAMPLED_AUDIO_PATH/* $AUDIO_PATH
