@@ -23,7 +23,7 @@ KALDI_FILES_PREPARATION=true
 TRAINING_START=true
 STAGE1=true
 STAGE2=true
-STAGE3=true
+STAGE3=false
 STAGE4=false
 STAGE5=false
 
@@ -81,7 +81,7 @@ fi
 ### Kaldi Data Prep
 if `$KALDI_FILES_PREPARATION -eq true`
 then
-    mkdir $KALDI_DIRECTORY
+    mkdir -p $KALDI_DIRECTORY
     echo generating utt2spk files 
     python3 ./KaldiPreprocessing/generate_utt2spk.py --kaldi_destination $KALDI_DIRECTORY
 
@@ -107,7 +107,7 @@ if `$TRAINING_START -eq true`
 then
     echo preparing recipe
     mv $DATASET_PATH $ESPNET_RECIPEE_PATH
-    mkdir $ESPNET_RECIPEE_PATH/data
+    mkdir -p $ESPNET_RECIPEE_PATH/data
     cd $ESPNET_RECIPEE_PATH
     cp -r $KALDI_DIRECTORY/* ./data
     mv ./data/val ./data/dev
