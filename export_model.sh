@@ -6,6 +6,6 @@ mkdir -p $EXPORT_DIR/data
 mkdir -p $EXPORT_DIR/exp/model
 
 
-cat ./utils/decode.yaml > $EXPORT_DIR/conf/tuning/decode.yaml
+cat ./conf/decode_export.yaml > $EXPORT_DIR/conf/tuning/decode.yaml
 cp $CURRENT_EXP_DIRECTORY/model.acc.best $EXPORT_DIR/exp/model
 cp $CURRENT_EXP_DIRECTORY/model.json $EXPORT_DIR/exp/model
