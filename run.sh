@@ -14,13 +14,13 @@ SAMPLING_RATE=16000
 ############################ Manual Control over each operational stage
 ### preprocessing stages
 DATA_CURATION=false
-FORMAT_CORRECTION=true
-DATA_SPLITTING=true
-KALDI_FILES_PREPARATION=true
+FORMAT_CORRECTION=false
+DATA_SPLITTING=false
+KALDI_FILES_PREPARATION=false
 
 
 ### Training stages
-TRAINING_START=false
+TRAINING_START=true
 STAGE1=false
 STAGE2=false
 STAGE3=false
@@ -34,10 +34,11 @@ set -e ## exit when error occurs
 
 ############################ Preprocessing Stages
 ### curate the dataset
-rm -rf ./temp/*
-rm -rf $ESPNET_RECIPEE_PATH/banking-domain-dataset/ $ESPNET_RECIPEE_PATH/data $ESPNET_RECIPEE_PATH/dump $ESPNET_RECIPEE_PATH/fbank 
+
 if `$DATA_CURATION -eq true`
 then
+    rm -rf ./temp/*
+    rm -rf $ESPNET_RECIPEE_PATH/banking-domain-dataset/ $ESPNET_RECIPEE_PATH/data $ESPNET_RECIPEE_PATH/dump $ESPNET_RECIPEE_PATH/fbank 
     python3 DataCuration.py --audio_source $AUDIO_PATH --metadata $METADATA_PATH --audio_format $AUDIO_FORMAT
 fi
 
