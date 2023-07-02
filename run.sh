@@ -1,12 +1,12 @@
 ### paths and params
-DATASET_PATH='./banking-domain-dataset'
+DATASET_PATH='./common_voice'
 AUDIO_PATH=$DATASET_PATH'/audio_files'
 RESAMPLED_AUDIO_PATH='./temp/resampled_audios'
 METADATA_PATH=$DATASET_PATH'/metadata.tsv'
 KALDI_DIRECTORY=$DATASET_PATH'/KALDI_FILES'
 ESPNET_RECIPEE_PATH='../espnet/egs/librispeech/asr1'
 ESPNET_TRAIN_CONFIG_FILE='train_pytorch_transformer_lr5.0_ag8.v2.yaml'
-AUDIO_FORMAT='m4a' #audio format of the collected dataset
+AUDIO_FORMAT='mp3' #audio format of the collected dataset
 BITRATE=16
 SAMPLING_RATE=16000
 
@@ -20,9 +20,9 @@ KALDI_FILES_PREPARATION=true
 
 
 ### Training stages
-TRAINING_START=true
-STAGE1=true
-STAGE2=true
+TRAINING_START=false
+STAGE1=false
+STAGE2=false
 STAGE3=false
 STAGE4=false
 STAGE5=false
@@ -53,13 +53,21 @@ then
     echo SAMPLING_RATE: $SAMPLING_RATE
     mkdir -p $RESAMPLED_AUDIO_PATH
     m4a="m4a"
-
+    mp3="mp3"
     if [ "$AUDIO_FORMAT" = "$m4a" ]; then
         echo "m4a format detected. Convertion needed. Converting..."
         python3 utils/m4atowav.py --audio_source $AUDIO_PATH
         mv $AUDIO_PATH/* ./temp
         mv ./temp/wavs_out/* $AUDIO_PATH
     fi
+
+    if [ "$AUDIO_FORMAT" = "$mp3" ]; then
+        echo "mp3 format detected. Convertion needed. Converting..."
+        python3 utils/mp3towav.py --audio_source $AUDIO_PATH
+        mv $AUDIO_PATH/* ./temp
+        mv ./temp/wavs_out/* $AUDIO_PATH
+    fi
+
     for i in `ls $AUDIO_PATH`;
         do 
         sox $AUDIO_PATH/$i -r $SAMPLING_RATE -b $BITRATE -c 1 -G $RESAMPLED_AUDIO_PATH/${i//$AUDIO_FORMAT/wav}
