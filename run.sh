@@ -47,26 +47,26 @@ fi
 
 if `$FORMAT_CORRECTION -eq true`
 then
-    # echo Formatting Audio in $AUDIO_PATH
-    # echo Configuration is: -------------
-    # echo BITRATE: PCM$BITRATE
-    # echo SAMPLING_RATE: $SAMPLING_RATE
-    # mkdir -p $RESAMPLED_AUDIO_PATH
-    # m4a="m4a"
-    # mp3="mp3"
-    # if [ "$AUDIO_FORMAT" = "$m4a" ]; then
-    #     echo "m4a format detected. Convertion needed. Converting..."
-    #     python3 utils/m4atowav.py --audio_source $AUDIO_PATH
-    #     mv $AUDIO_PATH ./temp
-    #     mv ./temp/wavs_out $AUDIO_PATH
-    # fi
+    echo Formatting Audio in $AUDIO_PATH
+    echo Configuration is: -------------
+    echo BITRATE: PCM$BITRATE
+    echo SAMPLING_RATE: $SAMPLING_RATE
+    mkdir -p $RESAMPLED_AUDIO_PATH
+    m4a="m4a"
+    mp3="mp3"
+    if [ "$AUDIO_FORMAT" = "$m4a" ]; then
+        echo "m4a format detected. Convertion needed. Converting..."
+        python3 utils/m4atowav.py --audio_source $AUDIO_PATH
+        mv $AUDIO_PATH ./temp
+        mv ./temp/wavs_out $AUDIO_PATH
+    fi
 
-    # if [ "$AUDIO_FORMAT" = "$mp3" ]; then
-    #     echo "mp3 format detected. Convertion needed. Converting..."
-    #     python3 utils/mp3towav.py --audio_source $AUDIO_PATH
-    #     mv $AUDIO_PATH ./temp
-    #     mv ./temp/wavs_out $AUDIO_PATH
-    # fi
+    if [ "$AUDIO_FORMAT" = "$mp3" ]; then
+        echo "mp3 format detected. Convertion needed. Converting..."
+        python3 utils/mp3towav.py --audio_source $AUDIO_PATH
+        mv $AUDIO_PATH ./temp
+        mv ./temp/wavs_out $AUDIO_PATH
+    fi
 
     for i in `ls $AUDIO_PATH`;
         do 
