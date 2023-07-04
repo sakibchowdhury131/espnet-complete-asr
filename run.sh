@@ -13,7 +13,7 @@ SAMPLING_RATE=16000
 
 ############################ Manual Control over each operational stage
 ### preprocessing stages
-DATA_CURATION=true
+DATA_CURATION=false
 FORMAT_CORRECTION=true
 DATA_SPLITTING=true
 KALDI_FILES_PREPARATION=true    
