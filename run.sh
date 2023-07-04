@@ -6,7 +6,7 @@ METADATA_PATH=$DATASET_PATH'/metadata.tsv'
 KALDI_DIRECTORY=$DATASET_PATH'/KALDI_FILES'
 ESPNET_RECIPEE_PATH='../espnet/egs/librispeech/asr1'
 ESPNET_TRAIN_CONFIG_FILE='train_pytorch_transformer_lr5.0_ag8.v2.yaml'
-AUDIO_FORMAT='mp3' #audio format of the collected dataset
+AUDIO_FORMAT='mixed' #audio format of the collected dataset
 BITRATE=16
 SAMPLING_RATE=16000
 
@@ -55,6 +55,7 @@ then
     mkdir -p $RESAMPLED_AUDIO_PATH
     m4a="m4a"
     mp3="mp3"
+    mixed="mixed"
     if [ "$AUDIO_FORMAT" = "$m4a" ]; then
         echo "m4a format detected. Convertion needed. Converting..."
         python3 utils/m4atowav.py --audio_source $AUDIO_PATH
@@ -65,6 +66,13 @@ then
     if [ "$AUDIO_FORMAT" = "$mp3" ]; then
         echo "mp3 format detected. Convertion needed. Converting..."
         python3 utils/mp3towav.py --audio_source $AUDIO_PATH
+        mv $AUDIO_PATH ./temp
+        mv ./temp/wavs_out $AUDIO_PATH
+    fi
+
+    if [ "$AUDIO_FORMAT" = "$mixed" ]; then
+        echo "mixed format detected. Convertion needed. Converting..."
+        python3 utils/convert_format_to_wav.py --audio_source $AUDIO_PATH
         mv $AUDIO_PATH ./temp
         mv ./temp/wavs_out $AUDIO_PATH
     fi
