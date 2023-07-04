@@ -8,7 +8,8 @@ def rename(AUDIO_SOURCE = './dataset/audio_files',
     
     TEMP_DIR = './temp'
     print(f'Renaming files in ----> {AUDIO_SOURCE}')
-    fileExtension = random.choice(os.listdir(AUDIO_SOURCE)).split('.')[-1]
+    possible_formats = ['mp3', 'm4a', 'flac', 'wav']
+    # fileExtension = random.choice(os.listdir(AUDIO_SOURCE)).split('.')[-1]
     with open(METADATA, 'r') as f:
         lines = f.readlines()
 
@@ -18,7 +19,13 @@ def rename(AUDIO_SOURCE = './dataset/audio_files',
         utt_id = line.split('\t')[0]
         spk_id = line.split('\t')[1]
         utt = line.split('\t')[2]
-        current_filename = f'{AUDIO_SOURCE}/{utt_id}.{fileExtension}'
+        fileExtension = None
+        for format in possible_formats:
+            current_filename = f'{AUDIO_SOURCE}/{utt_id}.{format}'
+            if os.path.exists(current_filename):
+                fileExtension = format
+                break
+            
         new_filename = f'{AUDIO_SOURCE}/{spk_id}-{utt_id}.{fileExtension}'
         os.rename(current_filename, new_filename)
 

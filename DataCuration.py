@@ -8,7 +8,7 @@ def main(AUDIO_SOURCE, METADATA, audio_format):
     
     ### data integrity checking 
     OK = True
-    dataset_state = dataIntegrityChecker(AUDIO_SOURCE = AUDIO_SOURCE,  METADATA = METADATA, audio_format=audio_format)
+    dataset_state = dataIntegrityChecker(AUDIO_SOURCE = AUDIO_SOURCE,  METADATA = METADATA)
     if dataset_state == OK:
         print('Dataset ----> OK')
     else:

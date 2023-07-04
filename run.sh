@@ -1,5 +1,5 @@
 ### paths and params
-DATASET_PATH='./common_voice'
+DATASET_PATH='./complete_dataset'
 AUDIO_PATH=$DATASET_PATH'/audio_files'
 RESAMPLED_AUDIO_PATH='./temp/resampled_audios'
 METADATA_PATH=$DATASET_PATH'/metadata.tsv'
@@ -16,7 +16,7 @@ SAMPLING_RATE=16000
 DATA_CURATION=true
 FORMAT_CORRECTION=true
 DATA_SPLITTING=true
-KALDI_FILES_PREPARATION=true
+KALDI_FILES_PREPARATION=true    
 
 
 ### Training stages
